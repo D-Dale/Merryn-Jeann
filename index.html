@@ -1,3 +1,868 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merryn Jeann – Fear Of The Beauty Parlour</title>
+  <meta name="description" content="A subconscious manifesto of love, grief, and quiet transformation. Accède en exclusivité au film de Merryn Jeann." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #FF1D8E;
+      --pink-dark: #c4006b;
+      --black: #080808;
+      --cream: #f5f0e8;
+      --gray: #1a1a1a;
+      --text: #e8e0d5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ===== GRAIN OVERLAY ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://lh3.googleusercontent.com/d/1cVUQ24zkMLPD9EzXDhsQ0P9eRN-jVNO2');
+      background-size: cover;
+      background-position: center top;
+      filter: grayscale(20%) brightness(0.55);
+      transform: scale(1.03);
+      transition: transform 8s ease-out;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,8,8,0.1) 0%,
+        rgba(8,8,8,0.0) 30%,
+        rgba(8,8,8,0.6) 65%,
+        rgba(8,8,8,1) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem 2rem 3.5rem;
+      max-width: 900px;
+    }
+
+    .label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-artist {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: var(--pink);
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+
+    .hero-album {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 2.6rem);
+      text-transform: uppercase;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+
+    .hero-tagline {
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: rgba(232, 224, 213, 0.7);
+      margin-top: 1.2rem;
+      max-width: 480px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.9s;
+    }
+
+    .hero-cta {
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.1s;
+    }
+
+    .scroll-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--pink);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,29,142,0.4);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .scroll-cta:hover { color: #fff; border-color: #fff; }
+    .scroll-cta svg { animation: bounce 1.5s infinite; }
+
+    .hero-photo-credit {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      z-index: 3;
+    }
+
+    /* ===== TEASER SECTION ===== */
+    .teaser {
+      background: var(--black);
+      padding: 5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .teaser-inner {
+      max-width: 800px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .teaser-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .teaser-image {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .teaser-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%);
+      transition: filter 0.4s;
+    }
+    .teaser-image:hover img { filter: grayscale(0%); }
+
+    .teaser-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255,29,142,0.2);
+    }
+
+    .teaser-text {}
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1.2rem;
+    }
+
+    .teaser-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    .teaser-heading em { color: var(--pink); font-style: normal; }
+
+    .teaser-body {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: rgba(232, 224, 213, 0.7);
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--pink);
+      margin: 1.5rem 0;
+    }
+
+    /* ===== FORM SECTION ===== */
+    .form-section {
+      background: var(--gray);
+      padding: 5rem 2rem 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-section::before {
+      content: 'BEAUTY PARLOUR';
+      position: absolute;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(5rem, 18vw, 14rem);
+      text-transform: uppercase;
+      color: rgba(255,29,142,0.035);
+      letter-spacing: -0.02em;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .form-header {
+      text-align: center;
+      max-width: 520px;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-header .section-label { display: block; margin-bottom: 1rem; }
+
+    .form-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--cream);
+    }
+
+    .form-title span { color: var(--pink); }
+
+    .form-subtitle {
+      margin-top: 1rem;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: rgba(232, 224, 213, 0.6);
+      line-height: 1.7;
+    }
+
+    .form-card {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,29,142,0.15);
+      padding: 2.5rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 60px; height: 2px;
+      background: var(--pink);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(232, 224, 213, 0.5);
+    }
+
+    .form-group input, .form-group select {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,29,142,0.3);
+      padding: 0.6rem 0;
+      color: var(--cream);
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+
+    .form-group input::placeholder { color: rgba(232,224,213,0.25); font-style: italic; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--pink); }
+
+    .form-group select {
+      background: transparent;
+      cursor: pointer;
+      color: var(--cream);
+    }
+    .form-group select option { background: #1a1a1a; color: var(--cream); }
+
+    .newsletter-group {
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    .newsletter-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 1px solid rgba(255,29,142,0.4);
+      background: transparent;
+      accent-color: var(--pink);
+      cursor: pointer;
+      margin-top: 2px;
+    }
+
+    .newsletter-group label {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: rgba(232, 224, 213, 0.6);
+      cursor: pointer;
+    }
+
+    .newsletter-group label strong { color: var(--cream); font-weight: normal; }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn:hover { background: var(--pink-dark); }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .submit-btn .btn-loading { display: none; }
+    .submit-btn.loading .btn-text { display: none; }
+    .submit-btn.loading .btn-loading { display: inline; }
+
+    .form-error {
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      margin-top: 0.8rem;
+      text-align: center;
+      display: none;
+    }
+
+    /* ===== VIDEO SECTION ===== */
+    #video-section {
+      display: none;
+      background: var(--black);
+      padding: 5rem 2rem;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    #video-section.visible { display: flex; animation: fadeUp 0.8s ease forwards; }
+
+    .video-header {
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    .video-header .section-label { display: block; margin-bottom: 0.8rem; }
+
+    .video-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .video-title span { color: var(--pink); }
+
+    .video-subtitle {
+      margin-top: 0.8rem;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: rgba(232, 224, 213, 0.6);
+    }
+
+    .video-wrapper {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+      position: relative;
+      background: #111;
+      border: 1px solid rgba(255,29,142,0.2);
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ===== STREAMING / FOOTER ===== */
+    .streaming {
+      background: var(--black);
+      border-top: 1px solid rgba(255,29,142,0.1);
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .streaming-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(232, 224, 213, 0.4);
+    }
+
+    .streaming-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+    }
+
+    .stream-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(232, 224, 213, 0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .stream-link:hover { color: var(--pink); border-color: var(--pink); }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .social-link {
+      color: rgba(232, 224, 213, 0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+    .social-link:hover { color: var(--pink); }
+    .social-link svg { width: 20px; height: 20px; }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.7rem;
+      color: rgba(232, 224, 213, 0.25);
+      padding: 1.5rem 2rem 2rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    /* ===== SUCCESS STATE ===== */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .success-message.visible { display: block; animation: fadeUp 0.6s ease forwards; }
+
+    .success-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 0.5rem;
+    }
+
+    .success-text {
+      font-style: italic;
+      color: rgba(232, 224, 213, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 480px) {
+      .hero-content { padding: 2rem 1.5rem 3rem; }
+      .form-card { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <div class="label">Rescue + Return Records — 2025</div>
+    <h1 class="hero-artist">Merryn<br>Jeann</h1>
+    <p class="hero-album">Fear Of The Beauty Parlour</p>
+    <p class="hero-tagline">A subconscious manifesto of love,<br>grief, and quiet transformation</p>
+    <div class="hero-cta">
+      <a href="#form" class="scroll-cta">
+        Accéder au film en exclusivité
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 1L7 13M7 13L12 8M7 13L2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-photo-credit">© Vivienne De Matteis</div>
+</section>
+
+<!-- ===== TEASER ===== -->
+<section class="teaser">
+  <div class="teaser-inner">
+    <div class="teaser-image">
+      <img src="https://lh3.googleusercontent.com/d/1pGnL5FnHKAED15jsnj6YYySTtNYE88YD"
+           alt="Merryn Jeann by Amber Wright"
+           loading="lazy" />
+    </div>
+    <div class="teaser-text">
+      <div class="section-label">L'Album</div>
+      <h2 class="teaser-heading">Entre instinct punk &amp; <em>fragile introspection</em></h2>
+      <div class="divider"></div>
+      <p class="teaser-body">
+        Un album introspectif qui erre entre pop alternative, ambient et paysages expérimentaux — créant un univers poétique, intime et sans frontières.
+      </p>
+      <p class="teaser-body" style="margin-top: 1rem">
+        Conçu comme un manifeste subconscient, avec son film d'accompagnement, <em>Fear Of The Beauty Parlour</em> sort le <strong style="color:var(--cream)">18 septembre 2025</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM ===== -->
+<section class="form-section" id="form">
+  <div class="form-header">
+    <span class="section-label">Accès exclusif</span>
+    <h2 class="form-title">Laisse ton contact,<br><span>regarde le film</span></h2>
+    <p class="form-subtitle">
+      En échange de tes coordonnées, accède en avant-première au teaser du film expérimental de Merryn Jeann.
+    </p>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <div id="formContent">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" placeholder="Jane" autocomplete="given-name" />
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" placeholder="Doe" autocomplete="family-name" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="jane@example.com" autocomplete="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="pays">Pays de résidence</label>
+        <select id="pays">
+          <option value="">— Sélectionne ton pays —</option>
+          <option>France</option>
+          <option>Belgique</option>
+          <option>Suisse</option>
+          <option>Canada</option>
+          <option>Australia</option>
+          <option>United Kingdom</option>
+          <option>United States</option>
+          <option>Germany</option>
+          <option>Netherlands</option>
+          <option>Japan</option>
+          <option>New Zealand</option>
+          <option>Autre</option>
+        </select>
+      </div>
+
+      <div class="newsletter-group">
+        <input type="checkbox" id="newsletter" />
+        <label for="newsletter">
+          Je souhaite m'abonner à la newsletter de <strong>Merryn Jeann</strong> et celle du label <strong>Rescue + Return Records</strong>
+        </label>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+        <span class="btn-text">Regarder le film →</span>
+        <span class="btn-loading">Envoi en cours…</span>
+      </button>
+
+      <div class="form-error" id="formError">Une erreur est survenue. Vérifie ton email et réessaie.</div>
+    </div>
+
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">✦</div>
+      <div class="success-title">Merci !</div>
+      <p class="success-text">Le film se dévoile juste en dessous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO (révélée après soumission) ===== -->
+<section id="video-section">
+  <div class="video-header">
+    <span class="section-label">Film exclusif</span>
+    <h2 class="video-title">Fear Of The <span>Beauty Parlour</span></h2>
+    <p class="video-subtitle">Film expérimental — Merryn Jeann, 2025</p>
+  </div>
+  <div class="video-wrapper">
+    <!-- ⚠️ REMPLACE "VOTRE_ID_YOUTUBE" par le vrai ID de la vidéo YouTube (ex: dQw4w9WgXcQ) -->
+    <iframe
+      id="videoIframe"
+      src=""
+      title="Fear Of The Beauty Parlour - Film"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- ===== STREAMING + SOCIAL ===== -->
+<footer>
+  <div class="streaming">
+    <span class="streaming-label">Écouter Merryn Jeann sur</span>
+    <div class="streaming-links">
+      <a class="stream-link" href="https://www.merrynjeann.com.au/" target="_blank" rel="noopener">Site officiel</a>
+      <a class="stream-link" href="https://open.spotify.com/intl-fr/artist/6PwHyGcUfjwdjT9cdsaVWT?si=w2BJi-yzTliiadry7ex7Rg" target="_blank" rel="noopener">Spotify</a>
+      <a class="stream-link" href="https://music.apple.com/fr/artist/merryn-jeann/923414088" target="_blank" rel="noopener">Apple Music</a>
+      <a class="stream-link" href="https://www.deezer.com/en/artist/7009165" target="_blank" rel="noopener">Deezer</a>
+      <a class="stream-link" href="https://www.qobuz.com/dk-en/interpreter/merryn-jeann/2035516" target="_blank" rel="noopener">Qobuz</a>
+      <a class="stream-link" href="https://www.bandsintown.com/a/11156320-merryn-jeann" target="_blank" rel="noopener">Bandsintown</a>
+    </div>
+
+    <div class="social-links">
+      <!-- Instagram -->
+      <a class="social-link" href="https://www.instagram.com/merryn_jeann/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4.5"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a class="social-link" href="https://www.youtube.com/@MerrynJeann/" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.5 7.5s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.4 4.5 12 4.5 12 4.5s-4.4 0-6.7.1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2.3 9.1 2.3 10.7v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.8C6.9 18.4 12 18.5 12 18.5s4.4 0 6.7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5c0-1.6-.2-3.2-.2-3.2zm-11.8 6.5V9.6l5.4 2.2-5.4 2.2z"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a class="social-link" href="https://www.facebook.com/merrynjeann" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+      <!-- Bandcamp -->
+      <a class="social-link" href="https://merrynjeann.bandcamp.com" target="_blank" rel="noopener" aria-label="Bandcamp">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 Merryn Jeann / Rescue + Return Records — All rights reserved
+  </div>
+</footer>
+
+<script>
+  // ===== CONFIG AIRTABLE =====
+  // ⚠️ IMPORTANT : Remplace par ton token Airtable Personal Access Token
+  // Tu le trouves sur https://airtable.com/create/tokens
+  // Donne les permissions : data.records:write sur la base FOTBP
+  const AIRTABLE_TOKEN = 'YOUR_AIRTABLE_PERSONAL_ACCESS_TOKEN';
+  const BASE_ID = 'appgTPB0BhH7sUM3R';
+  const TABLE_ID = 'tblSbwwI7R7KOk6nD';
+
+  // ⚠️ IMPORTANT : Remplace par l'ID YouTube de ta vidéo
+  // Ex : si l'URL est https://youtu.be/dQw4w9WgXcQ, l'ID est dQw4w9WgXcQ
+  const YOUTUBE_VIDEO_ID = 'VOTRE_ID_YOUTUBE';
+
+  // ===== HERO IMAGE LOAD =====
+  window.addEventListener('load', () => {
+    document.getElementById('heroBg').classList.add('loaded');
+  });
+
+  // ===== FORM SUBMIT =====
+  async function handleSubmit() {
+    const email = document.getElementById('email').value.trim();
+    const prenom = document.getElementById('prenom').value.trim();
+    const nom = document.getElementById('nom').value.trim();
+    const pays = document.getElementById('pays').value;
+    const newsletter = document.getElementById('newsletter').checked;
+    const btn = document.getElementById('submitBtn');
+    const errorEl = document.getElementById('formError');
+
+    errorEl.style.display = 'none';
+
+    if (!email || !email.includes('@')) {
+      errorEl.textContent = 'Merci de renseigner un email valide.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          records: [{
+            fields: {
+              'Email': email,
+              'Prénom': prenom,
+              'Nom': nom,
+              'Pays': pays,
+              'Newsletter': newsletter,
+              "Date d'inscription": new Date().toISOString()
+            }
+          }]
+        })
+      });
+
+      if (!res.ok) throw new Error('Airtable error');
+
+      // Succès : afficher message + vidéo
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('successMessage').classList.add('visible');
+
+      // Révéler la vidéo
+      const videoSection = document.getElementById('video-section');
+      document.getElementById('videoIframe').src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0`;
+      videoSection.classList.add('visible');
+
+      setTimeout(() => {
+        videoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 600);
+
+    } catch (err) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      errorEl.textContent = 'Une erreur est survenue. Vérifie ta connexion et réessaie.';
+      errorEl.style.display = 'block';
+    }
+  }
+
+  // Permettre la soumission via la touche Entrée
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const active = document.activeElement;
+      if (active && ['INPUT', 'SELECT'].includes(active.tagName)) {
+        handleSubmit();
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
 <!doctype html>
 <html lang="fr">
   <head>
