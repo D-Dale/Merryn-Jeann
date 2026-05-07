@@ -88,7 +88,7 @@
     /* Mobile: reframe to show the artist's face */
     @media (max-width: 600px) {
       .hero-bg {
-        background-position: 60% top;
+        background-position: 15% top;
       }
     }
 
@@ -833,7 +833,7 @@
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <p class="hero-label">Rescue + Return Records — 2025</p>
+    <p class="hero-label">Rescue + Return Records — 2026</p>
     <h1 class="hero-artist">Merryn<br>Jeann</h1>
     <p class="hero-album">Fear Of The Beauty Parlour</p>
     <p class="hero-tagline">A subconscious manifesto of love,<br>grief, and quiet transformation</p>
@@ -905,7 +905,8 @@
       <em>at the premiere</em>
     </h2>
     <p class="form-subtitle">
-      Leave your details to be part of the first screening of <em>Fear Of The Beauty Parlour</em> — June 25, 2026.
+      Be part of the first screening<br>
+      <em>Fear Of The Beauty Parlour</em> — June 25, 2026.
     </p>
   </div>
 
@@ -947,7 +948,7 @@
           <input type="checkbox" id="newsletter" />
           <span class="check-box"></span>
           <span class="check-text">
-            I'd like to subscribe to the newsletter of <strong>Merryn Jeann</strong> and <strong>Rescue + Return Records</strong>.
+            Subscribe to the newsletter of <strong>Merryn Jeann</strong> and <strong>Rescue + Return Records</strong>.
           </span>
         </label>
       </div>
@@ -1019,7 +1020,7 @@
       <p class="about-body">
         Conceived as a cross-art experience alongside its accompanying film, <em>Fear Of The Beauty Parlour</em> carries a raw punk spirit through a truly subconscious expression of songwriting and production.
       </p>
-      <p class="about-date">Album release — <strong>September 18, 2025</strong></p>
+      <p class="about-date">Album release — <strong>September 18, 2026</strong></p>
     </div>
   </div>
 </section>
@@ -1082,9 +1083,6 @@
   /* ===== HERO PARALLAX ===== */
   const heroBg = document.getElementById('heroBg');
   window.addEventListener('load', () => heroBg.classList.add('loaded'));
-  window.addEventListener('scroll', () => {
-    heroBg.style.transform = `scale(1) translateY(${window.scrollY * 0.22}px)`;
-  }, { passive: true });
 
   /* ===== SCROLL REVEAL ===== */
   const io = new IntersectionObserver(
