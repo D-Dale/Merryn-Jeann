@@ -6,6 +6,18 @@
   <title>Merryn Jeann – Fear Of The Beauty Parlour</title>
   <meta name="description" content="A subconscious manifesto of love, grief, and quiet transformation." />
 
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Merryn Jeann – Fear Of The Beauty Parlour" />
+  <meta property="og:description" content="A subconscious manifesto of love, grief, and quiet transformation." />
+  <meta property="og:image"       content="./images/merrynjeann3.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Merryn Jeann – Fear Of The Beauty Parlour" />
+  <meta name="twitter:description" content="A subconscious manifesto of love, grief, and quiet transformation." />
+  <meta name="twitter:image"       content="./images/merrynjeann3.png" />
+
   <style>
     /* ===== RESET ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -231,7 +243,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(155,153,148,0.6);
       margin-bottom: 1.5rem;
       opacity: 0;
       animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) forwards 0.3s;
@@ -239,11 +251,11 @@
 
     .hero-artist {
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: clamp(3.5rem, 12vw, 9rem);
       line-height: 0.9;
-      text-transform: uppercase;
-      color: #ffffff;
+      text-transform: none;
+      color: #D0CECC;
       letter-spacing: -0.03em;
       opacity: 0;
       animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
@@ -253,9 +265,9 @@
       font-family: var(--font-sans);
       font-weight: 400;
       font-size: clamp(0.95rem, 2.5vw, 1.5rem);
-      text-transform: uppercase;
-      color: var(--pink);
-      letter-spacing: 0.18em;
+      text-transform: none;
+      color: #9B9994;
+      letter-spacing: 0.08em;
       margin-top: 0.8rem;
       opacity: 0;
       animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) forwards 0.7s;
@@ -265,7 +277,7 @@
       font-family: var(--font-serif);
       font-style: italic;
       font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-      color: rgba(255,255,255,0.55);
+      color: rgba(155,153,148,0.7);
       margin-top: 1.5rem;
       line-height: 1.75;
       opacity: 0;
@@ -287,25 +299,29 @@
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      background: var(--white);
-      color: var(--black);
+      background: transparent;
+      color: #D0CECC;
+      border: 1px solid #9B9994;
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: 0.75rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       text-decoration: none;
       padding: 0.85rem 2rem;
-      transition: opacity 0.2s;
+      transition: border-color 0.25s, color 0.25s;
     }
-    .hero-cta-btn:hover { opacity: 0.85; }
+    .hero-cta-btn:hover {
+      border-color: #D0CECC;
+      color: #ffffff;
+    }
 
     .hero-scroll {
       font-family: var(--font-sans);
       font-size: 0.65rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
+      color: rgba(155,153,148,0.5);
     }
 
     .hero-credit {
@@ -315,7 +331,7 @@
       font-family: var(--font-sans);
       font-size: 0.6rem;
       letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.2);
+      color: rgba(155,153,148,0.35);
       z-index: 3;
     }
 
@@ -335,9 +351,8 @@
       font-size: 0.7rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #fff;
+      color: #9B9994;
       text-decoration: none;
-      mix-blend-mode: difference;
     }
 
     .nav-links {
@@ -351,9 +366,8 @@
       font-size: 0.7rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #fff;
+      color: #9B9994;
       text-decoration: none;
-      mix-blend-mode: difference;
       transition: color 0.25s, opacity 0.2s;
     }
     .nav-links a:hover { opacity: 0.5; }
@@ -361,7 +375,6 @@
     .site-nav.nav--light .nav-name,
     .site-nav.nav--light .nav-links a {
       color: var(--black);
-      mix-blend-mode: normal;
     }
     .site-nav.nav--light .nav-links a:hover { opacity: 0.45; }
 
@@ -458,12 +471,12 @@
 
     .trailer-title {
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: clamp(2rem, 5vw, 3.5rem);
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: -0.02em;
       line-height: 1;
-      color: var(--pink);
+      color: var(--black);
     }
 
     .trailer-sub {
@@ -515,9 +528,9 @@
 
     .form-title {
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: clamp(2rem, 5vw, 3.5rem);
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: -0.02em;
       line-height: 1;
       color: var(--black);
@@ -531,7 +544,7 @@
       color: var(--black);
       line-height: 1.8;
     }
-    .form-subtitle em { color: var(--pink); font-style: italic; }
+    .form-subtitle em { color: var(--black); font-style: italic; }
 
     .form-card {
       max-width: 480px;
@@ -641,10 +654,10 @@
       color: #fff;
       padding: 1.1rem 2rem;
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-transform: none;
       position: relative;
       overflow: hidden;
       transition: background 0.3s;
@@ -693,9 +706,9 @@
 
     .success-headline {
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: clamp(1.5rem, 4vw, 2.2rem);
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: -0.02em;
       line-height: 1.05;
       color: var(--black);
@@ -805,9 +818,9 @@
 
     .about-heading {
       font-family: var(--font-sans);
-      font-weight: 700;
+      font-weight: 400;
       font-size: clamp(1.5rem, 3vw, 2.2rem);
-      text-transform: uppercase;
+      text-transform: none;
       letter-spacing: -0.02em;
       line-height: 1;
       color: var(--black);
@@ -975,7 +988,7 @@
   </div>
   <div class="video-frame reveal reveal-d1">
     <iframe
-      src="https://www.youtube.com/embed/A0sunrPFqy4?rel=0&color=white"
+      src="https://www.youtube.com/embed/C5T73JuxQjQ?rel=0&color=white"
       title="Fear Of The Beauty Parlour – Official Trailer"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen>
@@ -990,7 +1003,6 @@
   <div class="form-deco" aria-hidden="true">💅</div>
 
   <div class="form-header reveal">
-    <span class="eyebrow">First Screening — June 25, 2026</span>
     <h2 class="form-title">Claim your seat<br>at the premiere</h2>
     <p class="form-subtitle">
       Leave your details to be part of the first screening of<br>
@@ -1051,7 +1063,7 @@
     <div class="success-state" id="successState">
       <span class="success-ticket">✦ Your ticket is confirmed ✦</span>
       <p class="success-headline">You're invited<br>to the first screening</p>
-      <p class="ticket-film">Fear Of The Beauty Parlour — June 25, 2026</p>
+      <p class="ticket-film">Fear Of The Beauty Parlour — <span data-premiere></span></p>
       <p class="success-sub">The premiere begins in</p>
 
       <div class="countdown">
@@ -1076,7 +1088,7 @@
         </div>
       </div>
 
-      <p class="countdown-date">Until — <strong>June 25, 2026</strong></p>
+      <p class="countdown-date">Until — <strong data-premiere></strong></p>
     </div>
   </div>
 </section>
@@ -1085,7 +1097,7 @@
 <section class="photos-section">
   <div class="photo-feature" id="photoFeature">
     <div class="photo-frame">
-      <img class="photo-base" src="./images/merrynjeann4.png" alt="Merryn Jeann" />
+      <img class="photo-base" src="./images/merrynjeann4.png" alt="Merryn Jeann" loading="eager" />
       <canvas class="photo-draw-canvas" aria-hidden="true"></canvas>
     </div>
   </div>
@@ -1153,8 +1165,16 @@
 </div><!-- .main-float-wrap -->
 
 <script>
-  /* ===== DATE GATE — show About section only after June 25, 2026 ===== */
-  const PREMIERE = new Date('2026-06-25T20:00:00').getTime();
+  /* ===== DATE — single source of truth ===== */
+  const PREMIERE      = new Date('2026-06-25T20:00:00').getTime();
+  const PREMIERE_LABEL = 'June 25, 2026';
+
+  /* Inject label wherever data-premiere attribute is present */
+  document.querySelectorAll('[data-premiere]').forEach(el => {
+    el.textContent = PREMIERE_LABEL;
+  });
+
+  /* ===== DATE GATE — show About section only after premiere ===== */
   if (Date.now() >= PREMIERE) {
     document.getElementById('aboutSection').classList.add('visible');
   }
@@ -1230,16 +1250,22 @@
       };
     }
 
+    let _obstacleCache = null;
+    function invalidateObstacleCache() { _obstacleCache = null; }
+    window.addEventListener('resize', invalidateObstacleCache);
+
     function getPhotoObstacle() {
+      if (_obstacleCache) return _obstacleCache;
       if (!arena || !photoSection) return null;
       const arenaRect = arena.getBoundingClientRect();
       const psRect = photoSection.getBoundingClientRect();
-      return {
+      _obstacleCache = {
         left:   psRect.left   - arenaRect.left,
         top:    psRect.top    - arenaRect.top,
         right:  psRect.right  - arenaRect.left,
         bottom: psRect.bottom - arenaRect.top
       };
+      return _obstacleCache;
     }
 
     function bounceOffObstacle(p, obs) {
@@ -1577,12 +1603,20 @@
   /* ===== COUNTDOWN ===== */
   function pad(n) { return String(n).padStart(2, '0'); }
 
+  let cdInterval = null;
+
   function updateCountdown() {
     const diff = Math.max(0, PREMIERE - Date.now());
     document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
     document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
     document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000) / 60000));
     document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000) / 1000));
+  }
+
+  function startCountdown() {
+    updateCountdown();
+    clearInterval(cdInterval);
+    cdInterval = setInterval(updateCountdown, 1000);
   }
 
   /* ===== FORM ===== */
@@ -1619,8 +1653,7 @@
 
       document.getElementById('formContent').style.display = 'none';
       document.getElementById('successState').classList.add('show');
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+      startCountdown();
 
     } catch (err) {
       btn.classList.remove('loading');
