@@ -727,64 +727,23 @@
       opacity: 0;
     }
 
-    .success-sub {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 0.88rem;
-      color: var(--black);
-      margin-bottom: 2rem;
-    }
-
-    /* Countdown */
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 0.4rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .countdown-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 68px;
-    }
-    .countdown-num {
+    .watch-film-btn {
+      display: inline-block;
+      width: 100%;
+      background: var(--black);
+      border: none;
+      color: #fff;
+      padding: 1.1rem 2rem;
       font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: clamp(2.5rem, 8vw, 4rem);
-      line-height: 1;
-      color: var(--black);
-      letter-spacing: -0.03em;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: none;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.3s;
     }
-    .countdown-label {
-      font-family: var(--font-sans);
-      font-size: 0.58rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--gray-text);
-      margin-top: 0.4rem;
-    }
-    .countdown-sep {
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      color: var(--pink);
-      line-height: 1;
-      align-self: flex-start;
-      padding-top: 0.2rem;
-    }
-    .countdown-date {
-      font-family: var(--font-sans);
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(17,17,17,0.3);
-      border-top: 1px solid var(--gray-mid);
-      padding-top: 1.2rem;
-      margin-top: 0.5rem;
-    }
-    .countdown-date strong { color: var(--gray-text); }
+    .watch-film-btn:hover { background: #2a2a2a; }
 
     /* ===== ABOUT (hidden until June 25, 2026) ===== */
     .about {
@@ -845,7 +804,7 @@
       border-top: 1px solid var(--gray-mid);
       padding-top: 1.2rem;
     }
-    .about-date strong { color: var(--pink); }
+    .about-date strong { color: var(--black); }
 
     /* ===== FOOTER ===== */
     .footer-main {
@@ -935,8 +894,7 @@
       .footer-main { padding: 3rem 1.5rem 1.5rem; }
       .submit-btn { padding: 1.2rem; font-size: 0.8rem; }
       .field input, .field select { font-size: 16px; }
-      .countdown { gap: 0.2rem; }
-      .countdown-block { min-width: 54px; }
+      .watch-film-btn { padding: 1.2rem; font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -1005,7 +963,7 @@
   <div class="form-header reveal">
     <h2 class="form-title">Claim your seat<br>at the premiere</h2>
     <p class="form-subtitle">
-      Leave your details to be part of the first screening of<br>
+      Leave your details and get access to the film<br>
       <em>Fear Of The Beauty Parlour</em>.
     </p>
   </div>
@@ -1064,31 +1022,8 @@
       <span class="success-ticket">✦ Your ticket is confirmed ✦</span>
       <p class="success-headline">You're invited<br>to the first screening</p>
       <p class="ticket-film">Fear Of The Beauty Parlour — <span data-premiere></span></p>
-      <p class="success-sub">The premiere begins in</p>
 
-      <div class="countdown">
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-days">00</span>
-          <span class="countdown-label">Days</span>
-        </div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-hours">00</span>
-          <span class="countdown-label">Hours</span>
-        </div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-mins">00</span>
-          <span class="countdown-label">Min</span>
-        </div>
-        <span class="countdown-sep">:</span>
-        <div class="countdown-block">
-          <span class="countdown-num" id="cd-secs">00</span>
-          <span class="countdown-label">Sec</span>
-        </div>
-      </div>
-
-      <p class="countdown-date">Until — <strong data-premiere></strong></p>
+      <a class="watch-film-btn" href="https://fearofthebeautyparlour-film.com/" target="_blank" rel="noopener">Watch the film now</a>
     </div>
   </div>
 </section>
@@ -1600,25 +1535,6 @@
     window.addEventListener('resize', update);
   })();
 
-  /* ===== COUNTDOWN ===== */
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  let cdInterval = null;
-
-  function updateCountdown() {
-    const diff = Math.max(0, PREMIERE - Date.now());
-    document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
-    document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000) / 60000));
-    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000) / 1000));
-  }
-
-  function startCountdown() {
-    updateCountdown();
-    clearInterval(cdInterval);
-    cdInterval = setInterval(updateCountdown, 1000);
-  }
-
   /* ===== FORM ===== */
   async function handleSubmit() {
     const email      = document.getElementById('email').value.trim();
@@ -1653,7 +1569,6 @@
 
       document.getElementById('formContent').style.display = 'none';
       document.getElementById('successState').classList.add('show');
-      startCountdown();
 
     } catch (err) {
       btn.classList.remove('loading');
